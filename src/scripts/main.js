@@ -15,18 +15,6 @@ document.getElementById("announcementBtn").addEventListener("click", () => {
   document.getElementById("announcementBar").style.display = "none";
 });
 
-const products = [
-  {
-    name: "Zolaldel",
-    categorie: "T-Shirt",
-    priceCents: "3400",
-    salePriceCents: "",
-    status: "sold-out", // available - sold-out - on-sale
-    image: "bg-[url('./images/zolaldel_tshirt_black.png')]",
-    image_hover: "group-hover:bg-[url('./images/zolaldel_tshirt_black_2.png')]",
-  },
-];
-
 let tshirtProductsHTML = "";
 let hoodiProductsHTML = "";
 let totebagProductsHTML = "";
@@ -37,7 +25,7 @@ products.forEach((product) => {
   if (product.status === "sold-out") {
     productHTML = `
     <div
-      class="bg-white w-full aspect-[1/1.1] rounded-2xl flex flex-col p-4 cursor-pointer hover:bg-orange-300 transition-colors group text-nowrap card">
+      class="bg-white w-full aspect-[1/1.1] rounded-2xl flex flex-col p-4 cursor-pointer hover:bg-orange-300 group text-nowrap card">
       <!-- Top Row-->
       <div class="flex justify-between">
         <!-- Title & Price -->
@@ -56,15 +44,16 @@ products.forEach((product) => {
       </div>
       <!-- Image Row -->
       <div
-        class="h-full w-full mt-2 rounded-xl ${product.image} bg-cover ${
-      product.image_hover
-    }"></div>
+        
+        style="background-image:url('./images/${product.image}');"
+        class="h-full w-full mt-2 rounded-xl  bg-cover ${product.image_hover}">
+      </div>
     </div>
   `;
   } else if (product.status === "available") {
     productHTML = `
       <div
-        class="bg-white w-full aspect-[1/1.1] rounded-2xl flex flex-col p-4 cursor-pointer hover:bg-orange-300 transition-colors group text-nowrap card">
+        class="bg-white w-full aspect-[1/1.1] rounded-2xl flex flex-col p-4 cursor-pointer hover:bg-orange-300 group text-nowrap card">
         <!-- Top Row-->
         <div class="flex justify-between">
           <!-- Title & Price -->
@@ -83,15 +72,17 @@ products.forEach((product) => {
         </div>
         <!-- Image Row -->
         <div
-          class="h-full w-full mt-2 rounded-xl ${product.image} bg-cover ${
-      product.image_hover
-    }"></div>
+          style="background-image:url('./images/${product.image}');"
+          class="h-full w-full mt-2 rounded-xl bg-cover ${product.image_hover}">
+        </div>
       </div>
     `;
   } else if (product.status === "on-sale") {
     productHTML = `
       <div
-        class="bg-white w-full aspect-[1/1.1] rounded-2xl flex flex-col p-4 cursor-pointer hover:bg-orange-300 transition-colors group text-nowrap card">
+        data-product-name="${product.name}"
+        data-product-price="${product.price}"
+        class="bg-white w-full aspect-[1/1.1] rounded-2xl flex flex-col p-4 cursor-pointer hover:bg-orange-300  group text-nowrap card">
         <!-- Top Row-->
         <div class="flex justify-between">
           <!-- Title & Price -->
@@ -99,9 +90,7 @@ products.forEach((product) => {
             <span>${product.name}</span>
             <span>${product.categorie}</span>
             <span class="text-sm text-gray-500 group-hover:text-white"
-              ><s>${product.priceCents / 100}</s> ${
-      product.salePriceCents / 100
-    }</span
+              ><s>${product.priceCents / 100}</s> ${product.salePriceCents / 100}</span
             >
           </div>
           <!-- Info -->
@@ -124,9 +113,9 @@ products.forEach((product) => {
         </div>
         <!-- Image Row -->
         <div
-          class="h-full w-full mt-2 rounded-xl ${product.image} bg-cover ${
-      product.image_hover
-    }"></div>
+          style="background-image:url('./images/${product.image}');"
+          class="h-full w-full mt-2 rounded-xl  ${product.image_hover} bg-cover">
+        </div>
       </div>
     `;
   }

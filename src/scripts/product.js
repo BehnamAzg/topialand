@@ -51,3 +51,39 @@ function quantityDecrease() {
 }
 incrementQuantityBtn.addEventListener("click", quantityIncrease);
 decrementQuantityBtn.addEventListener("click", quantityDecrease);
+
+
+// sub image gallery thingy
+let currentSlide = 0
+const subImgsBtn = document.querySelectorAll(".subImgsBtn");
+const expandedImg = document.getElementById("expandedImg");
+function expnadImage(img, n) {
+  currentSlide = n
+  
+  const currentImg = img.querySelector("img");
+  expandedImg.src = currentImg.src;
+  
+  subImgsBtn.forEach((i) => {
+    i.classList.remove("ring-2");
+  });
+  img.classList.add("ring-2");
+}
+
+function slideBtn(n) {
+
+  if (currentSlide >= 0 && currentSlide < 2 && n === 1) {
+    currentSlide++
+  } else if (currentSlide === 2 && n === 1) {
+    currentSlide = 0
+  } else if (currentSlide <= 2 && currentSlide > 0 && n === -1) {
+    currentSlide--
+  } else if (currentSlide === 0 && n === -1) {
+    currentSlide = 2
+  }
+  const currentImg = subImgsBtn[currentSlide].querySelector("img");
+  expandedImg.src = currentImg.src;
+  subImgsBtn.forEach((i) => {
+    i.classList.remove("ring-2");
+  });
+  subImgsBtn[currentSlide].classList.add("ring-2");
+}
