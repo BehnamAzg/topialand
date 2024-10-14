@@ -241,7 +241,6 @@ document.querySelectorAll(".card").forEach((card) => {
     const incrementQuantityBtn = document.getElementById("incrementQuantityBtn");
     const decrementQuantityBtn = document.getElementById("decrementQuantityBtn");
 
-    decrementQuantityBtn.setAttribute("disabled", "");
     productQuantityEl.innerHTML = productQuantity;
     function quantityIncrease() {
       if (productQuantity < 10) {

@@ -109,4 +109,10 @@ function addToCart() {
       alertMessages[i].style.display = "none";
     }
   }
+  let cartQuantity = 0;
+  cart.forEach((item) => {
+    cartQuantity += item.productCartQuantity
+  })
+  console.log(cartQuantity)
+  document.getElementById('cartItemsCount').textContent = cartQuantity
 }
