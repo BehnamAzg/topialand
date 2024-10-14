@@ -15,6 +15,10 @@ document.getElementById("announcementBtn").addEventListener("click", () => {
   document.getElementById("announcementBar").style.display = "none";
 });
 
+function formatCurrencyNew(priceCents) {
+  return (Math.round(priceCents) / 100).toFixed(2);
+}
+
 let tshirtProductsHTML = "";
 let hoodiProductsHTML = "";
 let totebagProductsHTML = "";
@@ -25,6 +29,14 @@ products.forEach((product) => {
   if (product.status === "sold-out") {
     productHTML = `
     <div
+        data-product-name="${product.name}"
+        data-product-categorie="${product.categorie}"
+        data-product-price="${formatCurrencyNew(product.priceCents)}"
+        data-product-saleprice="${formatCurrencyNew(product.salePriceCents)}"
+        data-product-status="${product.status}"
+        data-product-image0="${product.image}"
+        data-product-image1="${product.image_1}"
+        data-product-image2="${product.image_2}"
       class="bg-white w-full aspect-[1/1.1] rounded-2xl flex flex-col p-4 cursor-pointer hover:bg-orange-300 group text-nowrap card">
       <!-- Top Row-->
       <div class="flex justify-between">
@@ -33,7 +45,7 @@ products.forEach((product) => {
           <span>${product.name}</span>
           <span>${product.categorie}</span>
           <span class="text-sm text-gray-500 group-hover:text-white"
-            >$${product.priceCents / 100}</span
+            >$${formatCurrencyNew(product.priceCents)}</span
           >
         </div>
         <!-- Info -->
@@ -53,6 +65,14 @@ products.forEach((product) => {
   } else if (product.status === "available") {
     productHTML = `
       <div
+        data-product-name="${product.name}"
+        data-product-categorie="${product.categorie}"
+        data-product-price="${formatCurrencyNew(product.priceCents)}"
+        data-product-salePrice="${formatCurrencyNew(product.salePriceCents)}"
+        data-product-status="${product.status}"
+        data-product-image0="${product.image}"
+        data-product-image1="${product.image_1}"
+        data-product-image2="${product.image_2}"
         class="bg-white w-full aspect-[1/1.1] rounded-2xl flex flex-col p-4 cursor-pointer hover:bg-orange-300 group text-nowrap card">
         <!-- Top Row-->
         <div class="flex justify-between">
@@ -61,7 +81,7 @@ products.forEach((product) => {
             <span>${product.name}</span>
             <span>${product.categorie}</span>
             <span class="text-sm text-gray-500 group-hover:text-white"
-              >${product.priceCents / 100}</span
+              >${formatCurrencyNew(product.priceCents)}</span
             >
           </div>
           <!-- Info -->
@@ -81,7 +101,13 @@ products.forEach((product) => {
     productHTML = `
       <div
         data-product-name="${product.name}"
-        data-product-price="${product.price}"
+        data-product-categorie="${product.categorie}"
+        data-product-price="${formatCurrencyNew(product.priceCents)}"
+        data-product-salePrice="${formatCurrencyNew(product.salePriceCents)}"
+        data-product-status="${product.status}"
+        data-product-image0="${product.image}"
+        data-product-image1="${product.image_1}"
+        data-product-image2="${product.image_2}"
         class="bg-white w-full aspect-[1/1.1] rounded-2xl flex flex-col p-4 cursor-pointer hover:bg-orange-300  group text-nowrap card">
         <!-- Top Row-->
         <div class="flex justify-between">
@@ -90,7 +116,7 @@ products.forEach((product) => {
             <span>${product.name}</span>
             <span>${product.categorie}</span>
             <span class="text-sm text-gray-500 group-hover:text-white"
-              ><s>${product.priceCents / 100}</s> ${product.salePriceCents / 100}</span
+              ><s>${formatCurrencyNew(product.priceCents)}</s> ${formatCurrencyNew(product.salePriceCents)}</span
             >
           </div>
           <!-- Info -->

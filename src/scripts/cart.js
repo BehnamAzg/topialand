@@ -1,4 +1,6 @@
-import { formatCurrency } from "./utils/money.js";
+function formatCurrency(priceCents) {
+  return (Math.round(priceCents) / 100).toFixed(2);
+}
 
 let discountAmount = 0;
 const discountAmountEl = document.getElementById("discountAmountEl");
@@ -25,9 +27,7 @@ function checkDiscountCode() {
     invalidDiscountCode.classList.add("flex");
   }
 }
-document
-  .getElementById("discountApplyBtn")
-  .addEventListener("click", checkDiscountCode);
+document.getElementById("discountApplyBtn").addEventListener("click", checkDiscountCode);
 document.getElementById("removeDiscountCode").addEventListener("click", () => {
   discountCodeLabel.classList.remove("flex");
   discountCodeLabel.classList.add("hidden");

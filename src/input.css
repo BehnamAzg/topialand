@@ -171,7 +171,8 @@ html[dir="rtl"] {
   dialog,
   #announcementBar,
   #currencyDropdown,
-  #languageDropdown {
+  #languageDropdown,
+  #addToCartAlert {
     opacity: 1;
     transform: scale(1);
     transition: all 300ms ease-in-out;
@@ -216,5 +217,14 @@ html[dir="rtl"] {
   .socials-container a:hover::after {
     transform: translateY(-32px) rotate(0);
     opacity: 1;
+  }
+  .timedAlert {
+    animation: timedAlertAnimation 5s linear 2s forwards;
+  }
+  @keyframes timedAlertAnimation {
+    to {
+      opacity: 0;
+      visibility: hidden;
+    }
   }
 }

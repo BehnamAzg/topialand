@@ -7,6 +7,8 @@ const products = [
     status: "sold-out", // available - sold-out - on-sale
     image: "zolaldel_tshirt_black.png",
     image_hover: "group-hover:bg-[url('./images/zolaldel_tshirt_black_2.png')]",
+    image_1: "zolaldel_tshirt_white.png",
+    image_2: "zolaldel_tshirt_black_4.png"
   },
   {
     name: "Mia Vs Kourosh",
@@ -16,6 +18,8 @@ const products = [
     status: "available",
     image: "mia_kourosh_tshirt_white.png",
     image_hover: "group-hover:bg-[url('./images/mia_kourosh_tshirt_black_2.png')]",
+    image_1: "mia_kourosh_tshirt_black.png",
+    image_2: "mia_kourosh_tshirt_black_3.png"
   },
   {
     name: "Dogm Nabash",
@@ -25,6 +29,8 @@ const products = [
     status: "on-sale",
     image: "dogmnabash_tshirt_black_back.png",
     image_hover: "group-hover:bg-[url('./images/dogmnabash_tshirt_black_back_2.png')]",
+    image_1: "dogmnabash_tshirt_white.png",
+    image_2: "dogmnabash_tshirt_black_4.png"
   },
   {
     name: "Yeroze Garm",
@@ -34,6 +40,8 @@ const products = [
     status: "available",
     image: "yerozegarm_tshirt_white.png",
     image_hover: "group-hover:bg-[url('./images/yerozegarm_tshirt_white_3.png')]",
+    image_1: "yerozegarm_tshirt_white_back.png",
+    image_2: "yerozegarm_tshirt_white_2.png"
   },
   {
     name: "King Kourosh",
@@ -43,6 +51,8 @@ const products = [
     status: "available",
     image: "zolaldel_2_tshirt_black.png",
     image_hover: "group-hover:bg-[url('./images/zolaldel_2_tshirt_black_4.png')]",
+    image_1: "zolaldel_2_tshirt_black_2.png",
+    image_2: "zolaldel_2_tshirt_black_3.png"
   },
   {
     name: "JooJoo",
@@ -52,6 +62,8 @@ const products = [
     status: "sold-out",
     image: "joojoo_tshirt_white.png",
     image_hover: "group-hover:bg-[url('./images/joojoo_tshirt_white_2.png')]",
+    image_1: "joojoo_tshirt_black.png",
+    image_2: "joojoo_tshirt_white_3.png"
   },
   {
     name: "Namakiye",
@@ -61,6 +73,8 @@ const products = [
     status: "available",
     image: "namakiye_tshirt_black_back.png",
     image_hover: "group-hover:bg-[url('./images/namakiye_tshirt_black_back_3.png')]",
+    image_1: "namakiye_tshirt_black.png",
+    image_2: "namakiye_tshirt_black_back_2.png"
   },
   {
     name: "Michael",
@@ -70,6 +84,8 @@ const products = [
     status: "available",
     image: "michael_tshirt_white.png",
     image_hover: "group-hover:bg-[url('./images/michael_tshirt_black_2.png')]",
+    image_1: "michael_tshirt_black.png",
+    image_2: "michael_tshirt_black_2.png"
   },
   {
     name: "Black Metal Miaplays",
@@ -79,6 +95,8 @@ const products = [
     status: "available",
     image: "blackmetal_tshirt_black.png",
     image_hover: "group-hover:bg-[url('./images/blackmetal_tshirt_black_2.png')]",
+    image_1: "blackmetal_tshirt_black_2.png",
+    image_2: ""
   },
   {
     name: "Michael",
@@ -88,6 +106,8 @@ const products = [
     status: "sold-out",
     image: "michael_hoodie_black.png",
     image_hover: "group-hover:rotate-6",
+    image_1: "",
+    image_2: ""
   },
   {
     name: "JooJoo",
@@ -97,6 +117,8 @@ const products = [
     status: "available",
     image: "joojoo_hoodie_black.png",
     image_hover: "group-hover:rotate-6",
+    image_1: "",
+    image_2: ""
   },
   {
     name: "Dogm Nabash",
@@ -106,6 +128,8 @@ const products = [
     status: "on-sale",
     image: "dogmnabash_hoodie_black.png",
     image_hover: "group-hover:rotate-6",
+    image_1: "",
+    image_2: ""
   },
   {
     name: "Black Metal Miaplays",
@@ -115,6 +139,8 @@ const products = [
     status: "available",
     image: "blackmetal_hoodie_black.png",
     image_hover: "group-hover:rotate-6",
+    image_1: "",
+    image_2: ""
   },
   {
     name: "Kouman Approved",
@@ -124,6 +150,8 @@ const products = [
     status: "sold-out",
     image: "koumanverified_totebag.png",
     image_hover: "group-hover:rotate-6",
+    image_1: "",
+    image_2: ""
   },
   {
     name: "Mosis",
@@ -133,6 +161,8 @@ const products = [
     status: "sold-out",
     image: "mosis_totebag.png",
     image_hover: "group-hover:rotate-6",
+    image_1: "",
+    image_2: ""
   },
   {
     name: "Dogm Nabash",
@@ -142,6 +172,8 @@ const products = [
     status: "sold-out",
     image: "dogmnabash_totebag.png",
     image_hover: "group-hover:rotate-6",
+    image_1: "",
+    image_2: ""
   },
   {
     name: "Joojoo",
@@ -151,6 +183,8 @@ const products = [
     status: "sold-out",
     image: "joojoo_totebag.png",
     image_hover: "group-hover:rotate-6",
+    image_1: "",
+    image_2: ""
   },
   {
     name: "Milk Shokouman",
@@ -160,6 +194,8 @@ const products = [
     status: "sold-out",
     image: "shokouman_milk.png",
     image_hover: "group-hover:rotate-6",
+    image_1: "shokouman_milk_3.png",
+    image_2: "shokouman_milk_4.png"
   },
   {
     name: "Dark Shokouman",
@@ -169,5 +205,7 @@ const products = [
     status: "sold-out",
     image: "shokouman_dark.png",
     image_hover: "group-hover:rotate-6",
+    image_1: "shokouman_dark_3.png",
+    image_2: "shokouman_dark_4.png"
   },
 ];
