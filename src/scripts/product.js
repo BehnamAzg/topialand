@@ -66,15 +66,26 @@ function slideBtn(n) {
 
 const addToCartAlert = document.getElementById("addToCartAlert");
 function addToCart() {
-  cart.push({
-    productCartName: currentProductName,
-    productCartCategorie: currentProductCategorie,
-    productCartSize: selectedSize,
-    productCartColor: selectedColor,
-    productCartQuantity: productQuantity,
-    productCartPrice: currentProductPrice,
-    productCartSalePrice: currentProductSaleprice,
+  let matchingItem;
+  cart.forEach((item) => {
+    if (currentProductName === item.productCartName) {
+      matchingItem = item;
+    }
   });
+  if (matchingItem) {
+    matchingItem.productCartQuantity += productQuantity;
+  } else {
+    cart.push({
+      productCartName: currentProductName,
+      productCartCategorie: currentProductCategorie,
+      productCartSize: selectedSize,
+      productCartColor: selectedColor,
+      productCartQuantity: productQuantity,
+      productCartPrice: currentProductPrice,
+      productCartSalePrice: currentProductSaleprice,
+    });
+  }
+
   productDialog.close();
   addToCartAlert.innerHTML += `
     <div class="timedAlert w-fit h-fit bg-emerald-500 flex justify-center items-center pr-3 pl-1 py-1 rounded-full mt-2">
@@ -93,7 +104,7 @@ function addToCart() {
   `;
   const alertMessages = document.getElementsByClassName("timedAlert");
   for (let i = 0; i < alertMessages.length; i++) {
-    j = i + 1
+    j = i + 1;
     if (j < alertMessages.length) {
       alertMessages[i].style.display = "none";
     }
