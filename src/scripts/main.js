@@ -31,8 +31,8 @@ products.forEach((product) => {
     <div
         data-product-name="${product.name}"
         data-product-categorie="${product.categorie}"
-        data-product-price="${formatCurrencyNew(product.priceCents)}"
-        data-product-saleprice="${formatCurrencyNew(product.salePriceCents)}"
+        data-product-price="${product.priceCents}"
+        data-product-saleprice="${product.salePriceCents}"
         data-product-status="${product.status}"
         data-product-image0="${product.image}"
         data-product-image1="${product.image_1}"
@@ -67,8 +67,8 @@ products.forEach((product) => {
       <div
         data-product-name="${product.name}"
         data-product-categorie="${product.categorie}"
-        data-product-price="${formatCurrencyNew(product.priceCents)}"
-        data-product-salePrice="${formatCurrencyNew(product.salePriceCents)}"
+        data-product-price="${product.priceCents}"
+        data-product-salePrice="${product.salePriceCents}"
         data-product-status="${product.status}"
         data-product-image0="${product.image}"
         data-product-image1="${product.image_1}"
@@ -102,8 +102,8 @@ products.forEach((product) => {
       <div
         data-product-name="${product.name}"
         data-product-categorie="${product.categorie}"
-        data-product-price="${formatCurrencyNew(product.priceCents)}"
-        data-product-salePrice="${formatCurrencyNew(product.salePriceCents)}"
+        data-product-price="${product.priceCents}"
+        data-product-salePrice="${product.salePriceCents}"
         data-product-status="${product.status}"
         data-product-image0="${product.image}"
         data-product-image1="${product.image_1}"

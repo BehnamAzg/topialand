@@ -275,7 +275,7 @@ document.querySelectorAll(".card").forEach((card) => {
     const subImgsBtn = document.querySelectorAll(".subImgsBtn");
     const expandedImg = document.getElementById("expandedImg");
 
-    currentProduct(productName, productCategorie, productPrice, productSaleprice);
+    currentProduct(productName, productCategorie, productPrice, productSaleprice, productImage0);
     const addToCartBtn = document.getElementById("addToCartBtn");
     if (productStatus != "sold-out") {
       addToCartBtn.addEventListener("click", addToCart);
@@ -288,9 +288,9 @@ productDialog.addEventListener("click", () => {
 
 function productMainPrice(price, salePrice) {
   if (salePrice != 0) {
-    return `<s class="text-gray-400">$${price}</s> $${salePrice}`;
+    return `<s class="text-gray-400">$${formatCurrency(price)}</s> $${formatCurrency(salePrice)}`;
   } else {
-    return `$${price}`;
+    return `$${formatCurrency(price)}`;
   }
 }
 
@@ -378,31 +378,31 @@ function productSize(categorie) {
           <button
             data-size="s"
             class="select-none selectSizeBtn inline-block px-3 py-1 rounded-full border-orange-200 border focus:outline-none focus:border-red-200 focus:ring-2 focus:ring-red-200 hover:bg-orange-100"
-            onclick="selectSize('s')">
+            onclick="selectSize('S')">
             S
           </button>
           <button
             data-size="m"
             class="select-none selectSizeBtn inline-block px-3 py-1 rounded-full border-orange-200 border focus:outline-none focus:border-red-200 focus:ring-2 focus:ring-red-200 hover:bg-orange-100"
-            onclick="selectSize('m')">
+            onclick="selectSize('M')">
             M
           </button>
           <button
             data-size="l"
             class="select-none selectSizeBtn inline-block px-3 py-1 rounded-full border-orange-200 border focus:outline-none focus:border-red-200 focus:ring-2 focus:ring-red-200 hover:bg-orange-100"
-            onclick="selectSize('l')">
+            onclick="selectSize('L')">
             L
           </button>
           <button
             data-size="xl"
             class="select-none selectSizeBtn inline-block px-3 py-1 rounded-full border-orange-200 border focus:outline-none focus:border-red-200 focus:ring-2 focus:ring-red-200 hover:bg-orange-100"
-            onclick="selectSize('xl')">
+            onclick="selectSize('XL')">
             XL
           </button>
           <button
             data-size="xxl"
             class="select-none selectSizeBtn inline-block px-3 py-1 rounded-full border-orange-200 border focus:outline-none focus:border-red-200 focus:ring-2 focus:ring-red-200 hover:bg-orange-100"
-            onclick="selectSize('xxl')">
+            onclick="selectSize('XXL')">
             XXL
           </button>
         </div>
@@ -466,9 +466,11 @@ function soldOut(status) {
   }
 }
 
-function currentProduct(name, categorie, price, saleprice) {
+function currentProduct(name, categorie, price, saleprice, image) {
   currentProductName = name;
   currentProductCategorie = categorie;
-  currentProductPrice = price;
-  currentProductSaleprice = saleprice;
+  currentProductPrice = Number(price);
+  currentProductSaleprice = Number(saleprice);
+  currentProductImage = image;
 }
+

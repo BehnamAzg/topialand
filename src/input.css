@@ -219,7 +219,7 @@ html[dir="rtl"] {
     opacity: 1;
   }
   .timedAlert {
-    animation: timedAlertAnimation 5s linear 2s forwards;
+    animation: timedAlertAnimation 4s linear 2s forwards;
   }
   @keyframes timedAlertAnimation {
     to {
