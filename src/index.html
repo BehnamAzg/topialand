@@ -114,7 +114,7 @@
             class="flex flex-col w-full items-center md:items-start justify-center font-bold tracking-widest text-xl md:text-2xl lg:text-3xl ml-0 md:ml-16 my-8 md:my-0 text-black rtl:tracking-normal rtl:mr-0 rtl:md:mr-16">
             <div class="mb-3">
               <span data-i18n="welcome"></span>
-              <div class="rotate-[15deg] rtl:rotate-[-15deg] text-2xl md:text-3xl lg:text-4xl inline-flex">❤️</div>
+              <div class="rotate-[15deg] rtl:rotate-[-15deg] text-2xl md:text-3xl lg:text-4xl inline-flex animate-pulse ">❤️</div>
             </div>
 
             <span data-i18n="mia_kou" class="mb-3"></span>
@@ -1284,139 +1284,9 @@
               <!-- card -->
             </div>
             <!-- right column -->
-            <div class="col-span-1">
+            <div id="cartOrderSummary" class="col-span-1">
               <!-- Order Summary -->
-              <div id="cartOrderSummary" class="bg-orange-100 p-6 rounded-xl w-full">
-                <div>
-                  <h1 class="text-lg font-semibold">Your Order Summary</h1>
-                  <ul class="mt-4 space-y-2">
-                    <li class="flex justify-between text-sm font-normal w-full text-gray-500">
-                      <p>Subtotal (3 items)</p>
-                      <span class="font-medium">$26.88</span>
-                    </li>
-                    <li class="flex justify-between text-sm font-normal w-full text-gray-500">
-                      <p>
-                        Shipping
-                        <button
-                          class="shippingPolicyBtn hover:text-orange-400 focus:outline-none focus:border-red-200 focus:ring-2 focus:ring-red-200">
-                          <svg
-                            class="inline-block"
-                            xmlns="http://www.w3.org/2000/svg"
-                            width="16"
-                            height="16"
-                            fill="currentColor"
-                            viewBox="0 0 256 256">
-                            <path
-                              d="M140,180a12,12,0,1,1-12-12A12,12,0,0,1,140,180ZM128,72c-22.06,0-40,16.15-40,36v4a8,8,0,0,0,16,0v-4c0-11,10.77-20,24-20s24,9,24,20-10.77,20-24,20a8,8,0,0,0-8,8v8a8,8,0,0,0,16,0v-.72c18.24-3.35,32-17.9,32-35.28C168,88.15,150.06,72,128,72Zm104,56A104,104,0,1,1,128,24,104.11,104.11,0,0,1,232,128Zm-16,0a88,88,0,1,0-88,88A88.1,88.1,0,0,0,216,128Z"></path>
-                          </svg>
-                        </button>
-                      </p>
-                      <span class="font-medium">$4.99</span>
-                    </li>
-                    <li class="flex justify-between text-sm font-normal w-full text-gray-500">
-                      <p>Discount</p>
-                      <span id="discountAmountEl" class="font-medium text-orange-400"></span>
-                    </li>
-                    <!-- discount added container -->
-                    <li
-                      id="discountCodeLabel"
-                      class="hidden justify-between items-center text-sm font-normal text-gray-500 bg-orange-200 w-fit rounded-full pl-3 pr-1 h-7">
-                      <svg
-                        class="text-orange-400"
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="16"
-                        height="16"
-                        fill="currentColor"
-                        viewBox="0 0 256 256">
-                        <path
-                          d="M243.31,136,144,36.69A15.86,15.86,0,0,0,132.69,32H40a8,8,0,0,0-8,8v92.69A15.86,15.86,0,0,0,36.69,144L136,243.31a16,16,0,0,0,22.63,0l84.68-84.68a16,16,0,0,0,0-22.63ZM84,96A12,12,0,1,1,96,84,12,12,0,0,1,84,96Z"></path>
-                      </svg>
-                      <p class="tracking-wide px-2 text-black">HELLO</p>
-                      <button
-                        id="removeDiscountCode"
-                        class="rounded-full hover:bg-orange-100 p-1 focus:outline-none focus:border-red-200 focus:ring-2 focus:ring-red-200 text-xs bg-orange-200 group">
-                        <svg
-                          class="group-hover:text-black"
-                          xmlns="http://www.w3.org/2000/svg"
-                          width="12"
-                          height="12"
-                          fill="currentColor"
-                          viewBox="0 0 256 256">
-                          <path
-                            d="M208.49,191.51a12,12,0,0,1-17,17L128,145,64.49,208.49a12,12,0,0,1-17-17L111,128,47.51,64.49a12,12,0,0,1,17-17L128,111l63.51-63.52a12,12,0,0,1,17,17L145,128Z"></path>
-                        </svg>
-                      </button>
-                    </li>
-
-                    <li><hr class="h-px my-3 bg-gray-300 border-0" /></li>
-                    <li class="flex justify-between text-sm w-full text-black font-medium">
-                      <p>Total</p>
-                      <span class="">$35.55</span>
-                    </li>
-                  </ul>
-                  <!-- discount code input -->
-                  <form action="" class="relative mt-4">
-                    <input
-                      id="discountInputField"
-                      type="text"
-                      class="w-full pl-4 pr-16 rounded-full h-9 font-normal text-xs focus:outline-none focus:border-red-200 focus:ring-2 focus:ring-red-200"
-                      placeholder="Enter Discount Code"
-                      required />
-                    <button
-                      id="discountApplyBtn"
-                      type="submit"
-                      class="h-7 w-14 hover:bg-orange-100 rounded-full flex justify-center items-center p-2.5 absolute top-1/2 right-1 transform -translate-y-1/2 rtl:right-auto rtl:left-0 focus:outline-none focus:border-red-200 focus:ring-2 focus:ring-red-200 text-xs bg-orange-200">
-                      Apply
-                    </button>
-                  </form>
-                  <!-- valid discount code -->
-                  <p id="validDiscountCode" class="hidden text-xs font-normal text-green-500 mt-2 pl-4 items-center">
-                    <svg
-                      class="mr-1"
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="16"
-                      height="16"
-                      fill="currentColor"
-                      viewBox="0 0 256 256">
-                      <path
-                        d="M128,24A104,104,0,1,0,232,128,104.11,104.11,0,0,0,128,24Zm45.66,85.66-56,56a8,8,0,0,1-11.32,0l-24-24a8,8,0,0,1,11.32-11.32L112,148.69l50.34-50.35a8,8,0,0,1,11.32,11.32Z"></path>
-                    </svg>
-                    Discount code added
-                  </p>
-                  <!-- invalid discount code -->
-                  <p id="invalidDiscountCode" class="hidden text-xs font-normal text-red-500 mt-2 pl-4 items-center">
-                    <svg
-                      class="mr-1"
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="16"
-                      height="16"
-                      fill="currentColor"
-                      viewBox="0 0 256 256">
-                      <path
-                        d="M128,24A104,104,0,1,0,232,128,104.11,104.11,0,0,0,128,24Zm37.66,130.34a8,8,0,0,1-11.32,11.32L128,139.31l-26.34,26.35a8,8,0,0,1-11.32-11.32L116.69,128,90.34,101.66a8,8,0,0,1,11.32-11.32L128,116.69l26.34-26.35a8,8,0,0,1,11.32,11.32L139.31,128Z"></path>
-                    </svg>
-                    Invalid code
-                  </p>
-                </div>
-                <!-- checkout -->
-                <button
-                  class="w-full h-9 mt-3 px-3 rounded-full bg-orange-300 focus:outline-none focus:border-red-200 focus:ring-2 focus:ring-red-200 hover:bg-orange-200">
-                  Continue to Checkout
-                </button>
-                <!-- shop pay -->
-                <button
-                  class="w-full h-9 mt-3 px-3 rounded-full bg-white focus:outline-none focus:border-red-200 focus:ring-2 focus:ring-red-200 hover:bg-orange-200 flex justify-center items-center">
-                  <img src="./images/icons/shoppay.svg" alt="Shop Pay" />
-                </button>
-                <!-- paypal -->
-                <button
-                  class="w-full h-9 mt-3 px-3 rounded-full bg-white focus:outline-none focus:border-red-200 focus:ring-2 focus:ring-red-200 hover:bg-orange-200 flex justify-center items-center">
-                  <img src="./images/icons/paypal.svg" alt="PayPal" />
-                </button>
-              </div>
-              <ul class="list-disc text-xs text-gray-400 w-full pl-6 mt-3">
-                <li>Free Shipping on Canadian orders above $100</li>
-              </ul>
+              <div class="h-full w-full min-h-64 flex justify-center items-center text-x flex-col"><img class="w-auto h-48 -mt-4" src="./images/cuteEmptyCart.png" alt="">Your cart is empty</div>
             </div>
           </div>
         </div>
@@ -1592,8 +1462,8 @@
     <script src="./data/products.js"></script>
     <script src="./scripts/main.js"></script>
     <script src="./scripts/product.js"></script>
-    <script src="./scripts/modal.js"></script>
     <script src="./scripts/cart.js"></script>
+    <script src="./scripts/modal.js"></script>
     <script src="./scripts/filterElements.js"></script>
     <script src="./scripts/currency.js"></script>
     <script src="./scripts/language.js"></script>

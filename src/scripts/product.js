@@ -122,7 +122,6 @@ function addToCart() {
     cartQuantity += cartItem.productCartQuantity;
   });
   document.getElementById("cartItemsCount").textContent = cartQuantity;
-  console.log(cart);
 }
 
 let cartItemsHTML;
@@ -214,9 +213,9 @@ function updateCartItems() {
       `;
   });
   cartItemList.innerHTML = cartItemsHTML;
+  updateOrderSummary();
   cartItemRemoveBtn();
   changeCartItemQuantityBtn();
-  updateOrderSummary();
 }
 
 function productMainPriceNew(price, salePrice, quantity) {
@@ -237,7 +236,6 @@ function cartItemRemoveBtn() {
         if (itemInCart.productCartName === productName && itemInCart.productCartCategorie === productCategorie) {
           cart.splice(cart.indexOf(itemInCart), 1);
         }
-        console.log(cart);
       });
       updateCartItems();
       let cartQuantity = 0;
@@ -247,6 +245,7 @@ function cartItemRemoveBtn() {
       document.getElementById("cartItemsCount").textContent = cartQuantity;
     });
   });
+  updateOrderSummary();
 }
 
 function changeCartItemQuantityBtn() {
@@ -255,7 +254,7 @@ function changeCartItemQuantityBtn() {
       const productName = button.dataset.productName;
       const productCategorie = button.dataset.productCategorie;
       const action = button.dataset.action;
-      console.log("clicked");
+
       cart.forEach((itemInCart) => {
         if (itemInCart.productCartName === productName && itemInCart.productCartCategorie === productCategorie) {
           if (action === "increment") {
@@ -267,7 +266,7 @@ function changeCartItemQuantityBtn() {
           }
         }
       });
-      console.log(cart);
+
       updateCartItems();
       let cartQuantity = 0;
       cart.forEach((cartItem) => {
@@ -276,6 +275,7 @@ function changeCartItemQuantityBtn() {
       document.getElementById("cartItemsCount").textContent = cartQuantity;
     });
   });
+  updateOrderSummary();
 }
 
 function updateOrderSummary() {
@@ -293,18 +293,93 @@ function updateOrderSummary() {
     items += itemInCart.productCartQuantity;
   });
 
+  total = subtotal + shipping - discountAmount;
+
+  let discountLableHTML = "";
+  let validDiscountCodeHTML = "";
+  let invalidDiscountCodeHTML = "";
+
+  if (discountLabelHello) {
+    discountLableHTML = `
+    <li
+      id="discountCodeLabel"
+      class="flex justify-between items-center text-sm font-normal text-gray-500 bg-orange-200 w-fit rounded-full pl-3 pr-1 h-7">
+      <svg
+        class="text-orange-400"
+        xmlns="http://www.w3.org/2000/svg"
+        width="16"
+        height="16"
+        fill="currentColor"
+        viewBox="0 0 256 256">
+        <path
+          d="M243.31,136,144,36.69A15.86,15.86,0,0,0,132.69,32H40a8,8,0,0,0-8,8v92.69A15.86,15.86,0,0,0,36.69,144L136,243.31a16,16,0,0,0,22.63,0l84.68-84.68a16,16,0,0,0,0-22.63ZM84,96A12,12,0,1,1,96,84,12,12,0,0,1,84,96Z"></path>
+      </svg>
+      <p class="tracking-wide px-2 text-black">HELLO</p>
+      <button
+        onclick="removeDiscountCode();"
+        id="removeDiscountCode"
+        class="rounded-full hover:bg-orange-100 p-1 focus:outline-none focus:border-red-200 focus:ring-2 focus:ring-red-200 text-xs bg-orange-200 group">
+        <svg
+          class="group-hover:text-black"
+          xmlns="http://www.w3.org/2000/svg"
+          width="12"
+          height="12"
+          fill="currentColor"
+          viewBox="0 0 256 256">
+          <path
+            d="M208.49,191.51a12,12,0,0,1-17,17L128,145,64.49,208.49a12,12,0,0,1-17-17L111,128,47.51,64.49a12,12,0,0,1,17-17L128,111l63.51-63.52a12,12,0,0,1,17,17L145,128Z"></path>
+        </svg>
+      </button>
+    </li>
+  `;
+    validDiscountCodeHTML = `
+      <p id="validDiscountCode" class="flex text-xs font-normal text-green-500 mt-2 pl-4 items-center">
+        <svg
+          class="mr-1"
+          xmlns="http://www.w3.org/2000/svg"
+          width="16"
+          height="16"
+          fill="currentColor"
+          viewBox="0 0 256 256">
+          <path
+            d="M128,24A104,104,0,1,0,232,128,104.11,104.11,0,0,0,128,24Zm45.66,85.66-56,56a8,8,0,0,1-11.32,0l-24-24a8,8,0,0,1,11.32-11.32L112,148.69l50.34-50.35a8,8,0,0,1,11.32,11.32Z"></path>
+        </svg>
+        Discount code added
+      </p>
+    `;
+  }
+
+  if (isInvalidCode) {
+    invalidDiscountCodeHTML = `
+      <p id="invalidDiscountCode" class="flex text-xs font-normal text-red-500 mt-2 pl-4 items-center">
+        <svg
+          class="mr-1"
+          xmlns="http://www.w3.org/2000/svg"
+          width="16"
+          height="16"
+          fill="currentColor"
+          viewBox="0 0 256 256">
+          <path
+            d="M128,24A104,104,0,1,0,232,128,104.11,104.11,0,0,0,128,24Zm37.66,130.34a8,8,0,0,1-11.32,11.32L128,139.31l-26.34,26.35a8,8,0,0,1-11.32-11.32L116.69,128,90.34,101.66a8,8,0,0,1,11.32-11.32L128,116.69l26.34-26.35a8,8,0,0,1,11.32,11.32L139.31,128Z"></path>
+        </svg>
+        Invalid code
+      </p>
+    `;
+  }
+
   cartOrderSummary.innerHTML = `
-    <div>
+    <div  class="bg-orange-100 p-6 rounded-xl w-full">
       <h1 class="text-lg font-semibold">Your Order Summary</h1>
       <ul class="mt-4 space-y-2">
         <li class="flex justify-between text-sm font-normal w-full text-gray-500">
           <p>Subtotal (${items} items)</p>
-          <span class="font-medium">$${formatCurrency(subtotal)}</span>
+          <span class="font-medium">$${formatCurrencyNew(subtotal)}</span>
         </li>
         <li class="flex justify-between text-sm font-normal w-full text-gray-500">
           <p>
             Shipping
             <button
+              onclick="shippingPolicyDialog.showModal();"
               class="shippingPolicyBtn hover:text-orange-400 focus:outline-none focus:border-red-200 focus:ring-2 focus:ring-red-200">
               <svg
                 class="inline-block"
@@ -318,47 +393,19 @@ function updateOrderSummary() {
               </svg>
             </button>
           </p>
-          <span class="font-medium">$${formatCurrency(shipping)}</span>
+          <span class="font-medium">$${formatCurrencyNew(shipping)}</span>
         </li>
         <li class="flex justify-between text-sm font-normal w-full text-gray-500">
           <p>Discount</p>
-          <span id="discountAmountEl" class="font-medium text-orange-400"></span>
+          <span id="discountAmountEl" class="font-medium text-orange-400">-$${formatCurrencyNew(discountAmount)}</span>
         </li>
         <!-- discount added container -->
-        <li
-          id="discountCodeLabel"
-          class="hidden justify-between items-center text-sm font-normal text-gray-500 bg-orange-200 w-fit rounded-full pl-3 pr-1 h-7">
-          <svg
-            class="text-orange-400"
-            xmlns="http://www.w3.org/2000/svg"
-            width="16"
-            height="16"
-            fill="currentColor"
-            viewBox="0 0 256 256">
-            <path
-              d="M243.31,136,144,36.69A15.86,15.86,0,0,0,132.69,32H40a8,8,0,0,0-8,8v92.69A15.86,15.86,0,0,0,36.69,144L136,243.31a16,16,0,0,0,22.63,0l84.68-84.68a16,16,0,0,0,0-22.63ZM84,96A12,12,0,1,1,96,84,12,12,0,0,1,84,96Z"></path>
-          </svg>
-          <p class="tracking-wide px-2 text-black">HELLO</p>
-          <button
-            id="removeDiscountCode"
-            class="rounded-full hover:bg-orange-100 p-1 focus:outline-none focus:border-red-200 focus:ring-2 focus:ring-red-200 text-xs bg-orange-200 group">
-            <svg
-              class="group-hover:text-black"
-              xmlns="http://www.w3.org/2000/svg"
-              width="12"
-              height="12"
-              fill="currentColor"
-              viewBox="0 0 256 256">
-              <path
-                d="M208.49,191.51a12,12,0,0,1-17,17L128,145,64.49,208.49a12,12,0,0,1-17-17L111,128,47.51,64.49a12,12,0,0,1,17-17L128,111l63.51-63.52a12,12,0,0,1,17,17L145,128Z"></path>
-            </svg>
-          </button>
-        </li>
+        ${discountLableHTML}
 
         <li><hr class="h-px my-3 bg-gray-300 border-0" /></li>
         <li class="flex justify-between text-sm w-full text-black font-medium">
           <p>Total</p>
-          <span class="">$${formatCurrency(total)}</span>
+          <span class="">$${formatCurrencyNew(total)}</span>
         </li>
       </ul>
       <!-- discount code input -->
@@ -370,6 +417,7 @@ function updateOrderSummary() {
           placeholder="Enter Discount Code"
           required />
         <button
+          onclick="checkDiscountCode();"
           id="discountApplyBtn"
           type="submit"
           class="h-7 w-14 hover:bg-orange-100 rounded-full flex justify-center items-center p-2.5 absolute top-1/2 right-1 transform -translate-y-1/2 rtl:right-auto rtl:left-0 focus:outline-none focus:border-red-200 focus:ring-2 focus:ring-red-200 text-xs bg-orange-200">
@@ -377,72 +425,38 @@ function updateOrderSummary() {
         </button>
       </form>
       <!-- valid discount code -->
-      <p id="validDiscountCode" class="hidden text-xs font-normal text-green-500 mt-2 pl-4 items-center">
-        <svg
-          class="mr-1"
-          xmlns="http://www.w3.org/2000/svg"
-          width="16"
-          height="16"
-          fill="currentColor"
-          viewBox="0 0 256 256">
-          <path
-            d="M128,24A104,104,0,1,0,232,128,104.11,104.11,0,0,0,128,24Zm45.66,85.66-56,56a8,8,0,0,1-11.32,0l-24-24a8,8,0,0,1,11.32-11.32L112,148.69l50.34-50.35a8,8,0,0,1,11.32,11.32Z"></path>
-        </svg>
-        Discount code added
-      </p>
+      ${validDiscountCodeHTML}
+
       <!-- invalid discount code -->
-      <p id="invalidDiscountCode" class="hidden text-xs font-normal text-red-500 mt-2 pl-4 items-center">
-        <svg
-          class="mr-1"
-          xmlns="http://www.w3.org/2000/svg"
-          width="16"
-          height="16"
-          fill="currentColor"
-          viewBox="0 0 256 256">
-          <path
-            d="M128,24A104,104,0,1,0,232,128,104.11,104.11,0,0,0,128,24Zm37.66,130.34a8,8,0,0,1-11.32,11.32L128,139.31l-26.34,26.35a8,8,0,0,1-11.32-11.32L116.69,128,90.34,101.66a8,8,0,0,1,11.32-11.32L128,116.69l26.34-26.35a8,8,0,0,1,11.32,11.32L139.31,128Z"></path>
-        </svg>
-        Invalid code
-      </p>
+      ${invalidDiscountCodeHTML}
+
+      <!-- checkout -->
+      <button
+        class="w-full h-9 mt-3 px-3 rounded-full bg-orange-300 focus:outline-none focus:border-red-200 focus:ring-2 focus:ring-red-200 hover:bg-orange-200">
+        Continue to Checkout
+      </button>
+      <!-- shop pay -->
+      <button
+        class="w-full h-9 mt-3 px-3 rounded-full bg-white focus:outline-none focus:border-red-200 focus:ring-2 focus:ring-red-200 hover:bg-orange-200 flex justify-center items-center">
+        <img src="./images/icons/shoppay.svg" alt="Shop Pay" />
+      </button>
+      <!-- paypal -->
+      <button
+        class="w-full h-9 mt-3 px-3 rounded-full bg-white focus:outline-none focus:border-red-200 focus:ring-2 focus:ring-red-200 hover:bg-orange-200 flex justify-center items-center">
+        <img src="./images/icons/paypal.svg" alt="PayPal" />
+      </button>
     </div>
+    <ul class="list-disc text-xs text-gray-400 w-full pl-6 mt-3 space-y-1">
+      <li>Use code <b>"HELLO"</b> to get your first <b>discount</b>.</li>
+      <li>Free Shipping on Canadian orders above <b>$100</b></li>
+    </ul>
   `;
-  let discountAmount = 0;
-  const discountAmountEl = document.getElementById("discountAmountEl");
-  discountAmountEl.innerHTML = "-$" + formatCurrency(discountAmount);
-
-  const discountInputField = document.getElementById("discountInputField");
-  const validDiscountCode = document.getElementById("validDiscountCode");
-  const discountCodeLabel = document.getElementById("discountCodeLabel");
-  const invalidDiscountCode = document.getElementById("invalidDiscountCode");
-  function checkDiscountCode() {
-    if (discountInputField.value === "HELLO") {
-      validDiscountCode.classList.remove("hidden");
-      validDiscountCode.classList.add("flex");
-      discountCodeLabel.classList.remove("hidden");
-      discountCodeLabel.classList.add("flex");
-      invalidDiscountCode.classList.remove("flex");
-      invalidDiscountCode.classList.add("hidden");
-      discountAmount = 1000;
-      discountAmountEl.innerHTML = "-$" + formatCurrency(discountAmount);
-    } else if (discountInputField.value === "") {
-      return;
-    } else {
-      invalidDiscountCode.classList.remove("hidden");
-      invalidDiscountCode.classList.add("flex");
-    }
+  if (items === 0) {
+    cartOrderSummary.innerHTML = `
+      <div class="h-full w-full min-h-64 flex justify-center items-center text-x flex-col"><img class="w-auto h-48 -mt-4" src="./images/cuteEmptyCart.png" alt="">Your cart is empty</div>
+    `;
   }
-  document.getElementById("discountApplyBtn").addEventListener("click", checkDiscountCode);
-  document.getElementById("removeDiscountCode").addEventListener("click", () => {
-    discountCodeLabel.classList.remove("flex");
-    discountCodeLabel.classList.add("hidden");
-    validDiscountCode.classList.remove("flex");
-    validDiscountCode.classList.add("hidden");
-    invalidDiscountCode.classList.remove("flex");
-    invalidDiscountCode.classList.add("hidden");
-    discountAmount = 0;
-    discountAmountEl.innerHTML = "-$" + formatCurrency(discountAmount);
-  });
 
-  total = subtotal + shipping - discountAmount;
+  console.log(discountAmount);
   console.log(total);
 }

@@ -227,8 +227,10 @@ document.querySelectorAll(".card").forEach((card) => {
               calculated at checkout.
             </p>
             <!-- Add to cart -->
+            <div class="select-none">
             ${soldOut(productStatus)}
-            
+            </div>
+
           </div>
         </div>
       </div>
@@ -288,9 +290,9 @@ productDialog.addEventListener("click", () => {
 
 function productMainPrice(price, salePrice) {
   if (salePrice != 0) {
-    return `<s class="text-gray-400">$${formatCurrency(price)}</s> $${formatCurrency(salePrice)}`;
+    return `<s class="text-gray-400">$${formatCurrencyNew(price)}</s> $${formatCurrencyNew(salePrice)}`;
   } else {
-    return `$${formatCurrency(price)}`;
+    return `$${formatCurrencyNew(price)}`;
   }
 }
 
