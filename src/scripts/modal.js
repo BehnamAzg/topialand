@@ -476,3 +476,4 @@ function currentProduct(name, categorie, price, saleprice, image) {
   currentProductImage = image;
 }
 
+updateCartItems()

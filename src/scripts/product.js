@@ -1,3 +1,5 @@
+
+
 let selectedSize = "";
 function selectSize(size) {
   const sizeBtn = document.getElementsByClassName("selectSizeBtn");
@@ -117,6 +119,10 @@ function addToCart() {
       alertMessages[i].style.display = "none";
     }
   }
+  updateCartItemNumber()
+}
+
+function updateCartItemNumber() {
   let cartQuantity = 0;
   cart.forEach((cartItem) => {
     cartQuantity += cartItem.productCartQuantity;
@@ -213,16 +219,17 @@ function updateCartItems() {
       `;
   });
   cartItemList.innerHTML = cartItemsHTML;
-  updateOrderSummary();
+
   cartItemRemoveBtn();
   changeCartItemQuantityBtn();
+  updateOrderSummary();
 }
 
 function productMainPriceNew(price, salePrice, quantity) {
   if (salePrice != 0) {
-    return `<s class="text-gray-400">$${formatCurrency(price * quantity)}</s> $${formatCurrency(salePrice * quantity)}`;
+    return `<s class="text-gray-400">$${formatCurrencyNew(price * quantity)}</s> $${formatCurrencyNew(salePrice * quantity)}`;
   } else {
-    return `$${formatCurrency(price * quantity)}`;
+    return `$${formatCurrencyNew(price * quantity)}`;
   }
 }
 
@@ -245,6 +252,7 @@ function cartItemRemoveBtn() {
       document.getElementById("cartItemsCount").textContent = cartQuantity;
     });
   });
+  updateCartItemNumber()
   updateOrderSummary();
 }
 
@@ -457,6 +465,12 @@ function updateOrderSummary() {
     `;
   }
 
-  console.log(discountAmount);
-  console.log(total);
+  saveToStorage();
 }
+
+
+
+function saveToStorage() {
+  localStorage.setItem("cart", JSON.stringify(cart));
+}
+
